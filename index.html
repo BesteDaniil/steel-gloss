@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>STEEL &amp; GLOSS — детейлинг-центр: расчёт сметы онлайн</title>
-  <meta name="description" content="Соберите смету на детейлинг за минуту: класс машины, керамика, бронеплёнка по зонам кузова, химчистка. Цена считается сразу, заявка — в один клик. Демо-проект." />
+  <title>STEEL &amp; GLOSS — детейлинг-центр: керамика, бронеплёнка, химчистка</title>
+  <meta name="description" content="Детейлинг-центр STEEL &amp; GLOSS: керамика, бронеплёнка, химчистка и детейлинг салона. Соберите смету онлайн за минуту — класс машины, пакеты и зоны на схеме кузова." />
   <meta name="theme-color" content="#050607" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="STEEL & GLOSS" />
-  <meta property="og:title" content="STEEL & GLOSS — смета на детейлинг за минуту" />
-  <meta property="og:description" content="Интерактивный конфигуратор: класс машины, пакеты, карта кузова для бронеплёнки, смета и заявка. Демо-проект." />
+  <meta property="og:title" content="STEEL &amp; GLOSS — детейлинг-центр" />
+  <meta property="og:description" content="Детейлинг-центр STEEL &amp; GLOSS: керамика, бронеплёнка, химчистка и детейлинг салона. Соберите смету онлайн за минуту — класс машины, пакеты и зоны на схеме кузова." />
   <meta property="og:url" content="https://bestedaniil.github.io/steel-gloss/" />
   <meta property="og:image" content="https://bestedaniil.github.io/steel-gloss/og.png" />
   <meta property="og:image:alt" content="STEEL & GLOSS — конфигуратор детейлинга" />
@@ -20,187 +20,197 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23050607'/%3E%3Cpath d='M9 21 16 8l7 13M11.5 17h9' fill='none' stroke='%23c4ff3a' stroke-width='2.4' stroke-linecap='square'/%3E%3Cpath d='M7 25h18' stroke='%23c4ff3a' stroke-width='2' opacity='.5'/%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Unbounded:wght@500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=1" />
-  <!-- Версии всех модулей в одном месте: меняешь JS — поднимаешь ?v=N у этого файла здесь -->
+  <!-- Шрифты не блокируют отрисовку: до загрузки виден системный шрифт (display=swap) -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Unbounded:wght@500;700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Unbounded:wght@500;700&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Unbounded:wght@500;700&display=swap" /></noscript>
+  <link rel="stylesheet" href="css/base.css?v=2" />
+  <link rel="stylesheet" href="css/home.css?v=2" />
+  <!-- Версии всех JS-модулей в одном месте (одинаковый блок во всех 4 страницах) -->
   <script type="importmap">
     {
       "imports": {
-        "./js/pricing.js": "./js/pricing.js?v=1",
-        "./js/validation.js": "./js/validation.js?v=1",
-        "./js/store.js": "./js/store.js?v=1",
-        "./js/configurator.js": "./js/configurator.js?v=1",
-        "./js/bodymap.js": "./js/bodymap.js?v=1",
-        "./js/estimate.js": "./js/estimate.js?v=1",
-        "./js/phone-mask.js": "./js/phone-mask.js?v=1",
-        "./js/form.js": "./js/form.js?v=1"
+        "./js/pricing.js": "./js/pricing.js?v=2",
+        "./js/validation.js": "./js/validation.js?v=2",
+        "./js/persistence.js": "./js/persistence.js?v=2",
+        "./js/store.js": "./js/store.js?v=2",
+        "./js/nav.js": "./js/nav.js?v=2",
+        "./js/configurator.js": "./js/configurator.js?v=2",
+        "./js/bodymap.js": "./js/bodymap.js?v=2",
+        "./js/estimate.js": "./js/estimate.js?v=2",
+        "./js/phone-mask.js": "./js/phone-mask.js?v=2",
+        "./js/form.js": "./js/form.js?v=2"
       }
     }
   </script>
-  <script type="module" src="js/main.js?v=1"></script>
+  <!-- Все модули страницы грузятся параллельно, а не цепочкой импортов -->
+  <link rel="modulepreload" href="js/pricing.js?v=2" />
+  <link rel="modulepreload" href="js/persistence.js?v=2" />
+  <link rel="modulepreload" href="js/store.js?v=2" />
+  <link rel="modulepreload" href="js/nav.js?v=2" />
+  <script type="module" src="js/pages/home.js?v=2" blocking="render"></script>
 </head>
-<body>
-  <a class="skip-link" href="#configurator">Перейти к расчёту</a>
+<body data-page="home">
+  <a class="skip-link" href="#main">Перейти к содержимому</a>
 
   <header class="header">
     <div class="container header__inner">
-      <a class="logo" href="#top" aria-label="STEEL &amp; GLOSS — наверх">
+      <a class="logo" href="index.html" aria-label="STEEL &amp; GLOSS — на главную">
         <svg class="logo__mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M9 21 16 8l7 13M11.5 17h9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/><path d="M7 25h18" stroke="currentColor" stroke-width="2" opacity=".5"/></svg>
         <span>STEEL <i>&amp;</i> GLOSS</span>
       </a>
-      <nav class="nav" aria-label="Разделы">
-        <a href="#configurator"><b>01</b>Конфигуратор</a>
-        <a href="#bodymap"><b>02</b>Карта кузова</a>
-        <a href="#estimate"><b>03</b>Смета</a>
+      <nav class="steps" aria-label="Шаги расчёта">
+        <a href="calculator.html" data-step="calculator"><b>01</b><span>Конфигуратор</span></a>
+        <i class="steps__sep" aria-hidden="true"></i>
+        <a href="map.html" data-step="map"><b>02</b><span>Карта кузова</span></a>
+        <i class="steps__sep" aria-hidden="true"></i>
+        <a href="checkout.html" data-step="checkout"><b>03</b><span>Смета</span></a>
       </nav>
-      <a class="btn btn--small" href="#estimate">К смете</a>
+      <a class="header__total" href="checkout.html"><span>Смета</span><b data-total>0&nbsp;₽</b></a>
     </div>
   </header>
 
-  <main id="top">
+  <main id="main">
     <!-- ===== Первый экран ===== -->
-    <section class="hero">
-      <div class="hero__grid" aria-hidden="true"></div>
+    <section class="hero" aria-labelledby="hero-title">
       <div class="container hero__inner">
-        <p class="kicker"><span class="kicker__dot" aria-hidden="true"></span>Детейлинг-центр · Москва</p>
-        <h1 class="hero__title">Смета на&nbsp;детейлинг<br /><span>за&nbsp;одну минуту</span></h1>
-        <p class="hero__text">Выберите класс машины, пакеты и зоны бронеплёнки прямо на схеме кузова. Цена считается сразу — без звонков и «от».</p>
-        <div class="hero__actions">
-          <a class="btn btn--glow" href="#configurator">
-            Собрать смету
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-          </a>
-          <a class="btn btn--line" href="#bodymap">Открыть карту кузова</a>
+        <div class="hero__text">
+          <p class="page-head__kicker enter" style="--i:0">Детейлинг-центр · Москва</p>
+          <h1 class="hero__title enter" id="hero-title" style="--i:1">Блеск, который <em>защищает</em></h1>
+          <p class="hero__lead enter" style="--i:2">Соберите смету сами за минуту: выберите класс машины, пакеты услуг и отметьте зоны бронеплёнки на схеме кузова.</p>
+          <div class="hero__actions enter" style="--i:3">
+            <a class="btn btn--glow" href="calculator.html">
+              Перейти к расчету сметы
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="btn btn--line" href="#how">Как это работает</a>
+          </div>
         </div>
-        <dl class="hero__facts">
-          <div><dt>3</dt><dd>класса машин</dd></div>
-          <div><dt>8</dt><dd>зон бронеплёнки</dd></div>
-          <div><dt>0&nbsp;₽</dt><dd>за расчёт</dd></div>
+
+        <div class="hero__art enter" style="--i:2" aria-hidden="true">
+          <svg class="car" viewBox="0 0 640 270" focusable="false">
+            <defs>
+              <clipPath id="car-clip">
+                <path d="M40 192V160Q40 148 62 144L150 130Q190 82 260 76H400Q460 80 500 128L580 140Q604 146 604 168V192Z"/>
+              </clipPath>
+              <linearGradient id="car-shine" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#c4ff3a" stop-opacity="0"/>
+                <stop offset=".5" stop-color="#c4ff3a" stop-opacity=".45"/>
+                <stop offset="1" stop-color="#c4ff3a" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+
+            <!-- Блик пробегает по кузову -->
+            <g clip-path="url(#car-clip)">
+              <g transform="skewX(-22)"><rect class="car__shine" x="-120" y="60" width="90" height="150" fill="url(#car-shine)"/></g>
+            </g>
+
+            <!-- Линии автомобиля: каждая «прорисовывается» со своей задержкой -->
+            <g class="car__lines" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path class="car__ground" pathLength="1" d="M10 236H630" style="--d:0"/>
+              <path class="car__line car__line--body" pathLength="1" d="M40 192V160Q40 148 62 144L150 130Q190 82 260 76H400Q460 80 500 128L580 140Q604 146 604 168V192" style="--d:1"/>
+              <path class="car__line" pathLength="1" d="M40 192H102M198 192H442M538 192H604" style="--d:3"/>
+              <path class="car__line" pathLength="1" d="M102 192A48 48 0 0 1 198 192M442 192A48 48 0 0 1 538 192" style="--d:4"/>
+              <path class="car__line" pathLength="1" d="M176 130Q203 92 262 88H330V130ZM344 88H398Q440 92 468 130H344Z" style="--d:5"/>
+              <path class="car__line" pathLength="1" d="M337 88V176M318 142H330M356 142H368" style="--d:6"/>
+              <path class="car__line" pathLength="1" d="M60 150H84M572 148H596M140 158Q330 166 540 158" style="--d:7"/>
+              <circle class="car__line" pathLength="1" cx="150" cy="192" r="36" style="--d:6"/>
+              <circle class="car__line" pathLength="1" cx="490" cy="192" r="36" style="--d:6"/>
+              <circle class="car__line car__line--thin" pathLength="1" cx="150" cy="192" r="17" style="--d:8"/>
+              <circle class="car__line car__line--thin" pathLength="1" cx="490" cy="192" r="17" style="--d:8"/>
+              <path class="car__line car__line--thin" pathLength="1" d="M150 175V209M133 192H167M138 180L162 204M162 180L138 204M490 175V209M473 192H507M478 180L502 204M502 180L478 204" style="--d:9"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Цифры ===== -->
+    <section class="facts" aria-label="Коротко о конфигураторе">
+      <div class="container">
+        <dl class="facts__list">
+          <div class="facts__item enter" style="--i:0"><dt>3</dt><dd>класса машин</dd></div>
+          <div class="facts__item enter" style="--i:1"><dt>4</dt><dd>пакета услуг</dd></div>
+          <div class="facts__item enter" style="--i:2"><dt>8</dt><dd>зон бронеплёнки</dd></div>
+          <div class="facts__item enter" style="--i:3"><dt>0&nbsp;₽</dt><dd>за расчёт</dd></div>
         </dl>
       </div>
     </section>
 
-    <!-- ===== 01 Конфигуратор ===== -->
-    <section class="section" id="configurator" aria-labelledby="configurator-title">
+    <!-- ===== Услуги ===== -->
+    <section class="section" aria-labelledby="services-title">
       <div class="container">
-        <header class="section__head">
-          <p class="section__num">01</p>
-          <div>
-            <h2 class="section__title" id="configurator-title">Конфигуратор</h2>
-            <p class="section__lead">Цены в карточках сразу пересчитываются под класс машины.</p>
-          </div>
-        </header>
-
-        <fieldset class="group">
-          <legend class="group__title">Класс машины</legend>
-          <div class="class-grid" id="classOptions"></div>
-        </fieldset>
-
-        <fieldset class="group">
-          <legend class="group__title">Пакеты услуг</legend>
-          <div class="package-grid" id="packageOptions"></div>
-        </fieldset>
+        <p class="page-head__kicker"><b>01</b> Услуги</p>
+        <h2 class="section__title" id="services-title">Что мы делаем</h2>
+        <ul class="services">
+          <li class="card enter" style="--i:0">
+            <svg class="card__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 6 38 12v11c0 9-6 15-14 19C16 38 10 32 10 23V12z"/><path d="M17 24l5 5 9-10"/></svg>
+            <h3 class="card__title">Керамика кузова</h3>
+            <p class="card__text">Керамическое покрытие даёт глубокий блеск, отталкивает грязь и защищает лак от реагентов.</p>
+          </li>
+          <li class="card enter" style="--i:1">
+            <svg class="card__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 30V22Q6 19 9 18L16 16Q20 10 26 10H32Q37 11 40 17L43 19Q44 20 44 23V30"/><path d="M6 30h5M17 30h16M39 30h5"/><circle cx="14" cy="31" r="4"/><circle cx="36" cy="31" r="4"/><path d="M17 17Q20 14 25 14M24 36l4 4M30 36l-8 8" opacity=".6"/></svg>
+            <h3 class="card__title">Бронеплёнка — весь кузов</h3>
+            <p class="card__text">Прозрачный полиуретан закрывает все панели от сколов и царапин. Зоны можно выбрать на схеме.</p>
+          </li>
+          <li class="card enter" style="--i:2">
+            <svg class="card__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6h14l10 10v26H12z"/><path d="M26 6v10h10"/><path d="M18 26h12M18 32h8"/><path d="M38 4l1.5 3.5L43 9l-3.5 1.5L38 14l-1.5-3.5L33 9l3.5-1.5z"/></svg>
+            <h3 class="card__title">Химчистка салона</h3>
+            <p class="card__text">Глубокая очистка сидений, потолка и ковров: убираем пятна и запахи, возвращаем свежесть.</p>
+          </li>
+          <li class="card enter" style="--i:3">
+            <svg class="card__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="24" cy="24" r="17"/><circle cx="24" cy="24" r="4"/><path d="M24 7v13M24 28v13M7 24h13M28 24h13" opacity=".6"/></svg>
+            <h3 class="card__title">Детейлинг салона</h3>
+            <p class="card__text">Уход за кожей, пластиком и стеклом: аккуратная работа с каждой деталью интерьера.</p>
+          </li>
+        </ul>
       </div>
     </section>
 
-    <!-- ===== 02 Карта кузова ===== -->
-    <section class="section" id="bodymap" aria-labelledby="bodymap-title">
+    <!-- ===== Как это работает ===== -->
+    <section class="section" id="how" aria-labelledby="how-title">
       <div class="container">
-        <header class="section__head">
-          <p class="section__num">02</p>
-          <div>
-            <h2 class="section__title" id="bodymap-title">Карта кузова</h2>
-            <p class="section__lead">Бронеплёнка по зонам: нажмите на деталь или выберите её клавишами Tab и Enter.</p>
-          </div>
-        </header>
-
-        <div class="bodymap">
-          <div class="bodymap__stage">
-            <svg class="car" id="carMap" viewBox="0 0 240 480" role="group" aria-label="Схема кузова, вид сверху, перед сверху">
-              <g class="car__decor" aria-hidden="true">
-                <rect x="24" y="92" width="16" height="58" rx="5" />
-                <rect x="200" y="92" width="16" height="58" rx="5" />
-                <rect x="24" y="340" width="16" height="58" rx="5" />
-                <rect x="200" y="340" width="16" height="58" rx="5" />
-                <path class="car__body" d="M62 20 Q120 8 178 20 Q204 28 206 60 L208 420 Q206 456 180 462 Q120 472 60 462 Q34 456 32 420 L34 60 Q36 28 62 20 Z" />
-                <path class="car__glass" d="M68 166 L172 166 L162 200 L78 200 Z" />
-                <path class="car__glass" d="M76 306 L164 306 L174 336 L66 336 Z" />
-                <path d="M38 180 L20 174 L20 190 L38 194 Z" />
-                <path d="M202 180 L220 174 L220 190 L202 194 Z" />
-              </g>
-              <g id="zoneLayer"></g>
-            </svg>
-            <p class="bodymap__front" aria-hidden="true">перед</p>
-          </div>
-
-          <aside class="panel" aria-label="Выбранные зоны">
-            <p class="panel__label">Зона</p>
-            <div class="panel__focus" id="zoneFocus">
-              <p class="panel__name">Наведите на деталь</p>
-              <p class="panel__price">—</p>
-            </div>
-
-            <p class="panel__label">Выбрано</p>
-            <ul class="panel__list" id="zoneList"></ul>
-            <p class="panel__note" id="zoneNote" hidden></p>
-
-            <div class="saving" id="zoneSaving" hidden>
-              <p class="saving__text"></p>
-              <button class="btn btn--small btn--line" type="button" id="switchToFull">Выбрать полную оклейку</button>
-            </div>
-
-            <button class="btn btn--line btn--block" type="button" id="resetZones">Сбросить зоны</button>
-          </aside>
-        </div>
+        <p class="page-head__kicker"><b>02</b> Как это работает</p>
+        <h2 class="section__title" id="how-title">Три шага до сметы</h2>
+        <ol class="steps-cards">
+          <li class="enter" style="--i:0">
+            <a class="card card--step" href="calculator.html">
+              <span class="card__num" aria-hidden="true">01</span>
+              <h3 class="card__title">Конфигуратор</h3>
+              <p class="card__text">Выберите класс машины и пакеты услуг — итог считается сразу.</p>
+              <span class="card__go">Открыть <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+          </li>
+          <li class="enter" style="--i:1">
+            <a class="card card--step" href="map.html">
+              <span class="card__num" aria-hidden="true">02</span>
+              <h3 class="card__title">Карта кузова</h3>
+              <p class="card__text">Отметьте зоны бронеплёнки на схеме автомобиля.</p>
+              <span class="card__go">Открыть <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+          </li>
+          <li class="enter" style="--i:2">
+            <a class="card card--step" href="checkout.html">
+              <span class="card__num" aria-hidden="true">03</span>
+              <h3 class="card__title">Смета и заявка</h3>
+              <p class="card__text">Проверьте итоговую смету и отправьте заявку на запись.</p>
+              <span class="card__go">Открыть <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+          </li>
+        </ol>
       </div>
     </section>
 
-    <!-- ===== 03 Смета и заявка ===== -->
-    <section class="section" id="estimate" aria-labelledby="estimate-title">
+    <!-- ===== Финальный призыв ===== -->
+    <section class="cta" aria-labelledby="cta-title">
       <div class="container">
-        <header class="section__head">
-          <p class="section__num">03</p>
-          <div>
-            <h2 class="section__title" id="estimate-title">Смета и заявка</h2>
-            <p class="section__lead">Проверьте позиции и оставьте контакты — мастер перезвонит и подтвердит время.</p>
-          </div>
-        </header>
-
-        <div class="checkout">
-          <div class="estimate" id="estimateCard">
-            <div class="estimate__head">
-              <p class="estimate__title">Смета</p>
-              <p class="estimate__class" id="estimateClass"></p>
-            </div>
-            <p class="estimate__empty" id="estimateEmpty">Пока пусто. Выберите пакет в&nbsp;конфигураторе или зону на&nbsp;карте кузова — позиции появятся здесь.</p>
-            <ol class="estimate__list" id="estimateList"></ol>
-            <p class="sr-only" id="estimateLive" aria-live="polite"></p>
-            <div class="estimate__total">
-              <span>Итого</span>
-              <b id="estimateTotal">0&nbsp;₽</b>
-            </div>
-          </div>
-
-          <form class="form" id="orderForm" novalidate>
-            <div class="field">
-              <label for="fieldName">Имя</label>
-              <input id="fieldName" name="name" type="text" autocomplete="given-name" aria-describedby="errorName" />
-              <p class="field__error" id="errorName"></p>
-            </div>
-            <div class="field">
-              <label for="fieldPhone">Телефон</label>
-              <input id="fieldPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (999) 123-45-67" aria-describedby="errorPhone" />
-              <p class="field__error" id="errorPhone"></p>
-            </div>
-            <div class="field">
-              <label for="fieldCar">Марка и модель</label>
-              <input id="fieldCar" name="car" type="text" autocomplete="off" placeholder="Например, BMW X5" aria-describedby="errorCar" />
-              <p class="field__error" id="errorCar"></p>
-            </div>
-            <p class="field__error form__estimate-error" id="errorEstimate" tabindex="-1" role="alert"></p>
-            <button class="btn btn--glow btn--block" type="submit">Отправить смету мастеру</button>
-            <p class="form__hint">Нажимая кнопку, вы соглашаетесь на звонок мастера. Демо: данные никуда не уходят.</p>
-          </form>
+        <div class="cta__box enter" style="--i:0">
+          <h2 class="cta__title" id="cta-title">Узнайте стоимость за минуту</h2>
+          <p class="cta__text">Без звонков и ожидания: соберите смету и отправьте заявку, когда будете готовы.</p>
+          <a class="btn btn--glow" href="calculator.html">
+            Перейти к расчету сметы
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
         </div>
       </div>
     </section>
@@ -213,28 +223,5 @@
       <p class="footer__made">Разработка — <a href="https://bestedaniil.github.io/portfolio/">Daniil</a></p>
     </div>
   </footer>
-
-  <!-- Липкая плашка итога (прячется, когда смета на экране) -->
-  <a class="total-bar" id="totalBar" href="#estimate" hidden>
-    <span>Итого <b id="totalBarValue">0&nbsp;₽</b></span>
-    <span class="total-bar__go">К смете</span>
-  </a>
-
-  <dialog class="modal" id="successDialog" aria-labelledby="modalTitle">
-    <div class="modal__inner">
-      <p class="modal__badge">Заявка принята</p>
-      <h2 class="modal__title" id="modalTitle">Смета успешно сгенерирована и отправлена мастеру</h2>
-      <dl class="modal__data">
-        <div><dt>Номер сметы</dt><dd id="modalNumber"></dd></div>
-        <div><dt>Машина</dt><dd id="modalCar"></dd></div>
-        <div><dt>Телефон</dt><dd id="modalPhone"></dd></div>
-        <div class="modal__total"><dt>Итого</dt><dd id="modalTotal"></dd></div>
-      </dl>
-      <p class="modal__demo">Демо-режим: данные никуда не отправляются</p>
-      <form method="dialog">
-        <button class="btn btn--glow btn--block" type="submit" id="modalClose" autofocus>Понятно</button>
-      </form>
-    </div>
-  </dialog>
 </body>
 </html>

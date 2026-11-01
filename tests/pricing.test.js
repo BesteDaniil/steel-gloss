@@ -125,3 +125,17 @@ test("номер сметы SG-ГГММДД-123", function () {
 test("formatRub — пробелы-разделители и знак рубля", function () {
   assert.equal(formatRub(49000), "49 000 ₽");
 });
+
+test("склонение «позиция»: 0, 1, 2, 5, 11, 12, 21, 22, 104, 111", async function () {
+  const { formatPositions } = await import("../js/pricing.js");
+  assert.equal(formatPositions(0), "0 позиций");
+  assert.equal(formatPositions(1), "1 позиция");
+  assert.equal(formatPositions(2), "2 позиции");
+  assert.equal(formatPositions(5), "5 позиций");
+  assert.equal(formatPositions(11), "11 позиций");
+  assert.equal(formatPositions(12), "12 позиций");
+  assert.equal(formatPositions(21), "21 позиция");
+  assert.equal(formatPositions(22), "22 позиции");
+  assert.equal(formatPositions(104), "104 позиции");
+  assert.equal(formatPositions(111), "111 позиций");
+});

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Конфигуратор — STEEL &amp; GLOSS</title>
+  <meta name="description" content="Шаг 1 из 3: класс машины и пакеты услуг — керамика, бронеплёнка, химчистка, детейлинг салона. Цены пересчитываются сразу." />
+  <meta name="theme-color" content="#050607" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="STEEL & GLOSS" />
+  <meta property="og:title" content="Конфигуратор детейлинга — STEEL & GLOSS" />
+  <meta property="og:description" content="Шаг 1 из 3: класс машины и пакеты услуг — керамика, бронеплёнка, химчистка, детейлинг салона. Цены пересчитываются сразу." />
+  <meta property="og:url" content="https://bestedaniil.github.io/steel-gloss/calculator.html" />
+  <meta property="og:image" content="https://bestedaniil.github.io/steel-gloss/og.png" />
+  <meta property="og:image:alt" content="STEEL & GLOSS — конфигуратор детейлинга" />
+  <meta property="og:locale" content="ru_RU" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23050607'/%3E%3Cpath d='M9 21 16 8l7 13M11.5 17h9' fill='none' stroke='%23c4ff3a' stroke-width='2.4' stroke-linecap='square'/%3E%3Cpath d='M7 25h18' stroke='%23c4ff3a' stroke-width='2' opacity='.5'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Шрифты не блокируют отрисовку: до загрузки виден системный шрифт (display=swap) -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Unbounded:wght@500;700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Unbounded:wght@500;700&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Unbounded:wght@500;700&display=swap" /></noscript>
+  <link rel="stylesheet" href="css/base.css?v=2" />
+  <link rel="stylesheet" href="css/calculator.css?v=2" />
+  <!-- Версии всех JS-модулей в одном месте (одинаковый блок во всех 4 страницах) -->
+  <script type="importmap">
+    {
+      "imports": {
+        "./js/pricing.js": "./js/pricing.js?v=2",
+        "./js/validation.js": "./js/validation.js?v=2",
+        "./js/persistence.js": "./js/persistence.js?v=2",
+        "./js/store.js": "./js/store.js?v=2",
+        "./js/nav.js": "./js/nav.js?v=2",
+        "./js/configurator.js": "./js/configurator.js?v=2",
+        "./js/bodymap.js": "./js/bodymap.js?v=2",
+        "./js/estimate.js": "./js/estimate.js?v=2",
+        "./js/phone-mask.js": "./js/phone-mask.js?v=2",
+        "./js/form.js": "./js/form.js?v=2"
+      }
+    }
+  </script>
+  <!-- Все модули страницы грузятся параллельно, а не цепочкой импортов -->
+  <link rel="modulepreload" href="js/pricing.js?v=2" />
+  <link rel="modulepreload" href="js/persistence.js?v=2" />
+  <link rel="modulepreload" href="js/store.js?v=2" />
+  <link rel="modulepreload" href="js/nav.js?v=2" />
+  <link rel="modulepreload" href="js/configurator.js?v=2" />
+  <script type="module" src="js/pages/calculator.js?v=2" blocking="render"></script>
+</head>
+<body data-page="calculator" class="has-step-bar">
+  <a class="skip-link" href="#main">Перейти к содержимому</a>
+
+  <header class="header">
+    <div class="container header__inner">
+      <a class="logo" href="index.html" aria-label="STEEL &amp; GLOSS — на главную">
+        <svg class="logo__mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M9 21 16 8l7 13M11.5 17h9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/><path d="M7 25h18" stroke="currentColor" stroke-width="2" opacity=".5"/></svg>
+        <span>STEEL <i>&amp;</i> GLOSS</span>
+      </a>
+      <nav class="steps" aria-label="Шаги расчёта">
+        <a href="calculator.html" data-step="calculator" class="is-current" aria-current="step"><b>01</b><span>Конфигуратор</span></a>
+        <i class="steps__sep" aria-hidden="true"></i>
+        <a href="map.html" data-step="map"><b>02</b><span>Карта кузова</span></a>
+        <i class="steps__sep" aria-hidden="true"></i>
+        <a href="checkout.html" data-step="checkout"><b>03</b><span>Смета</span></a>
+      </nav>
+      <a class="header__total" href="checkout.html"><span>Смета</span><b data-total>0&nbsp;₽</b></a>
+    </div>
+  </header>
+
+  <main id="main">
+    <header class="page-head container">
+      <p class="page-head__kicker enter" style="--i:0"><b>01</b>Шаг 1 из 3</p>
+      <h1 class="page-head__title enter" style="--i:1">Конфигуратор</h1>
+      <p class="page-head__lead enter" style="--i:2">Выберите класс машины и пакеты услуг — цены в карточках сразу пересчитываются под класс.</p>
+    </header>
+
+    <div class="container">
+      <p class="notice" data-storage-warning hidden>Браузер не разрешает сохранять выбор (приватный режим или запрет cookies) — при переходе на другую страницу он сбросится.</p>
+      <fieldset class="group enter" style="--i:3">
+        <legend class="group__title">Класс машины</legend>
+        <div class="class-grid" id="classOptions"></div>
+      </fieldset>
+
+      <fieldset class="group enter" style="--i:4">
+        <legend class="group__title">Пакеты услуг</legend>
+        <div class="package-grid" id="packageOptions"></div>
+      </fieldset>
+    </div>
+    <div class="page-gap" aria-hidden="true"></div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p class="footer__logo">STEEL <i>&amp;</i> GLOSS</p>
+      <p class="footer__demo">Демо-проект, компания и цены вымышлены.</p>
+      <p class="footer__made">Разработка — <a href="https://bestedaniil.github.io/portfolio/">Daniil</a></p>
+    </div>
+  </footer>
+
+  <div class="step-bar">
+    <div class="container step-bar__inner">
+      <p class="step-bar__sum"><span>Итого</span><b data-total>0&nbsp;₽</b><small data-count>0 позиций</small></p>
+      <div class="step-bar__actions">
+        <a class="btn btn--glow" href="map.html">Далее: Выбрать зоны на карте<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg></a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -141,3 +141,18 @@ export function createEstimateNumber(date, randomValue) {
   const suffix = 100 + Math.floor(randomValue * 900);
   return "SG-" + datePart + "-" + suffix;
 }
+
+/* «1 позиция», «3 позиции», «5 позиций», «11 позиций», «21 позиция» */
+export function formatPositions(count) {
+  const lastTwo = count % 100;
+  const last = count % 10;
+  let word = "позиций";
+  if (lastTwo < 11 || lastTwo > 14) {
+    if (last === 1) {
+      word = "позиция";
+    } else if (last >= 2 && last <= 4) {
+      word = "позиции";
+    }
+  }
+  return count + " " + word;
+}

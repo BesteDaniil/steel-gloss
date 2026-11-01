@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Смета и заявка — STEEL &amp; GLOSS</title>
+  <meta name="description" content="Шаг 3 из 3: итоговая смета по пунктам и заявка мастеру в один клик." />
+  <meta name="theme-color" content="#050607" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="STEEL & GLOSS" />
+  <meta property="og:title" content="Смета и заявка — STEEL & GLOSS" />
+  <meta property="og:description" content="Шаг 3 из 3: итоговая смета по пунктам и заявка мастеру в один клик." />
+  <meta property="og:url" content="https://bestedaniil.github.io/steel-gloss/checkout.html" />
+  <meta property="og:image" content="https://bestedaniil.github.io/steel-gloss/og.png" />
+  <meta property="og:image:alt" content="STEEL & GLOSS — конфигуратор детейлинга" />
+  <meta property="og:locale" content="ru_RU" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23050607'/%3E%3Cpath d='M9 21 16 8l7 13M11.5 17h9' fill='none' stroke='%23c4ff3a' stroke-width='2.4' stroke-linecap='square'/%3E%3Cpath d='M7 25h18' stroke='%23c4ff3a' stroke-width='2' opacity='.5'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Шрифты не блокируют отрисовку: до загрузки виден системный шрифт (display=swap) -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Unbounded:wght@500;700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Unbounded:wght@500;700&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Unbounded:wght@500;700&display=swap" /></noscript>
+  <link rel="stylesheet" href="css/base.css?v=2" />
+  <link rel="stylesheet" href="css/checkout.css?v=2" />
+  <!-- Версии всех JS-модулей в одном месте (одинаковый блок во всех 4 страницах) -->
+  <script type="importmap">
+    {
+      "imports": {
+        "./js/pricing.js": "./js/pricing.js?v=2",
+        "./js/validation.js": "./js/validation.js?v=2",
+        "./js/persistence.js": "./js/persistence.js?v=2",
+        "./js/store.js": "./js/store.js?v=2",
+        "./js/nav.js": "./js/nav.js?v=2",
+        "./js/configurator.js": "./js/configurator.js?v=2",
+        "./js/bodymap.js": "./js/bodymap.js?v=2",
+        "./js/estimate.js": "./js/estimate.js?v=2",
+        "./js/phone-mask.js": "./js/phone-mask.js?v=2",
+        "./js/form.js": "./js/form.js?v=2"
+      }
+    }
+  </script>
+  <!-- Все модули страницы грузятся параллельно, а не цепочкой импортов -->
+  <link rel="modulepreload" href="js/pricing.js?v=2" />
+  <link rel="modulepreload" href="js/persistence.js?v=2" />
+  <link rel="modulepreload" href="js/store.js?v=2" />
+  <link rel="modulepreload" href="js/nav.js?v=2" />
+  <link rel="modulepreload" href="js/validation.js?v=2" />
+  <link rel="modulepreload" href="js/estimate.js?v=2" />
+  <link rel="modulepreload" href="js/phone-mask.js?v=2" />
+  <link rel="modulepreload" href="js/form.js?v=2" />
+  <script type="module" src="js/pages/checkout.js?v=2" blocking="render"></script>
+</head>
+<body data-page="checkout">
+  <a class="skip-link" href="#main">Перейти к содержимому</a>
+
+  <header class="header">
+    <div class="container header__inner">
+      <a class="logo" href="index.html" aria-label="STEEL &amp; GLOSS — на главную">
+        <svg class="logo__mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M9 21 16 8l7 13M11.5 17h9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/><path d="M7 25h18" stroke="currentColor" stroke-width="2" opacity=".5"/></svg>
+        <span>STEEL <i>&amp;</i> GLOSS</span>
+      </a>
+      <nav class="steps" aria-label="Шаги расчёта">
+        <a href="calculator.html" data-step="calculator"><b>01</b><span>Конфигуратор</span></a>
+        <i class="steps__sep" aria-hidden="true"></i>
+        <a href="map.html" data-step="map"><b>02</b><span>Карта кузова</span></a>
+        <i class="steps__sep" aria-hidden="true"></i>
+        <a href="checkout.html" data-step="checkout" class="is-current" aria-current="step"><b>03</b><span>Смета</span></a>
+      </nav>
+      <a class="header__total" href="checkout.html"><span>Смета</span><b data-total>0&nbsp;₽</b></a>
+    </div>
+  </header>
+
+  <main id="main">
+    <header class="page-head container">
+      <p class="page-head__kicker enter" style="--i:0"><b>03</b>Шаг 3 из 3</p>
+      <h1 class="page-head__title enter" style="--i:1">Смета и заявка</h1>
+      <p class="page-head__lead enter" style="--i:2">Проверьте позиции и оставьте контакты — мастер перезвонит и подтвердит время.</p>
+    </header>
+
+    <div class="container">
+      <p class="notice" data-storage-warning hidden>Браузер не разрешает сохранять выбор (приватный режим или запрет cookies) — при переходе на другую страницу он сбросится.</p>
+      <div class="checkout">
+        <div class="estimate enter" style="--i:3" id="estimateCard">
+          <div class="estimate__head">
+            <p class="estimate__title">Смета</p>
+            <p class="estimate__class" id="estimateClass"></p>
+          </div>
+          <p class="estimate__empty" id="estimateEmpty">Пока пусто. Начните с&nbsp;<a href="calculator.html">конфигуратора</a> или выберите зоны на&nbsp;<a href="map.html">карте кузова</a> — позиции появятся здесь.</p>
+          <ol class="estimate__list" id="estimateList"></ol>
+          <p class="sr-only" id="estimateLive" aria-live="polite"></p>
+          <div class="estimate__total">
+            <span>Итого</span>
+            <b id="estimateTotal">0&nbsp;₽</b>
+          </div>
+          <p class="estimate__edit"><span>Изменить:</span><a href="calculator.html">класс и пакеты</a><a href="map.html">зоны на карте</a></p>
+        </div>
+
+        <form class="form enter" style="--i:4" id="orderForm" novalidate>
+          <div class="field">
+            <label for="fieldName">Имя</label>
+            <input id="fieldName" name="name" type="text" autocomplete="given-name" aria-describedby="errorName" />
+            <p class="field__error" id="errorName"></p>
+          </div>
+          <div class="field">
+            <label for="fieldPhone">Телефон</label>
+            <input id="fieldPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (999) 123-45-67" aria-describedby="errorPhone" />
+            <p class="field__error" id="errorPhone"></p>
+          </div>
+          <div class="field">
+            <label for="fieldCar">Марка и модель</label>
+            <input id="fieldCar" name="car" type="text" autocomplete="off" placeholder="Например, BMW X5" aria-describedby="errorCar" />
+            <p class="field__error" id="errorCar"></p>
+          </div>
+          <p class="field__error form__estimate-error" id="errorEstimate" tabindex="-1" role="alert"></p>
+          <button class="btn btn--glow btn--block" type="submit">Отправить смету мастеру</button>
+          <p class="form__hint">Нажимая кнопку, вы соглашаетесь на звонок мастера. Демо: данные никуда не уходят.</p>
+        </form>
+      </div>
+    </div>
+    <div class="page-gap" aria-hidden="true"></div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p class="footer__logo">STEEL <i>&amp;</i> GLOSS</p>
+      <p class="footer__demo">Демо-проект, компания и цены вымышлены.</p>
+      <p class="footer__made">Разработка — <a href="https://bestedaniil.github.io/portfolio/">Daniil</a></p>
+    </div>
+  </footer>
+
+  <dialog class="modal" id="successDialog" aria-labelledby="modalTitle">
+    <div class="modal__inner">
+      <p class="modal__badge">Заявка принята</p>
+      <h2 class="modal__title" id="modalTitle">Смета успешно сгенерирована и отправлена мастеру</h2>
+      <dl class="modal__data">
+        <div><dt>Номер сметы</dt><dd id="modalNumber"></dd></div>
+        <div><dt>Машина</dt><dd id="modalCar"></dd></div>
+        <div><dt>Телефон</dt><dd id="modalPhone"></dd></div>
+        <div class="modal__total"><dt>Итого</dt><dd id="modalTotal"></dd></div>
+      </dl>
+      <p class="modal__demo">Демо-режим: данные никуда не отправляются</p>
+      <div class="modal__actions">
+        <form method="dialog">
+          <button class="btn btn--glow btn--block" type="submit" id="modalClose" autofocus>Понятно</button>
+        </form>
+        <button class="btn btn--line btn--block" type="button" id="newEstimate">Начать новый расчёт</button>
+      </div>
+    </div>
+  </dialog>
+</body>
+</html>

@@ -1,12 +1,12 @@
 /* ==========================================================
    Модуль 3 — форма заявки: своя валидация и модалка успеха
-   на нативном <dialog>. Маска телефона — в phone-mask.js.
+   на нативном <dialog>. Маску телефона подключает страница (phone-mask.js);
+   форма узнаёт об изменении номера по событию «phonemask».
    ========================================================== */
 
 import { calculateEstimate, createEstimateNumber, formatRub } from "./pricing.js";
 import { validateName, validatePhone, validateCar, validateEstimate } from "./validation.js";
-import { attachPhoneMask } from "./phone-mask.js";
-import { subscribe, getState } from "./store.js";
+import { subscribe, getState, resetAll } from "./store.js";
 
 export function initForm() {
   const form = document.getElementById("orderForm");
@@ -49,9 +49,9 @@ export function initForm() {
     return message;
   }
 
-  // Маска подключается первой: её blur убирает пустое «+7 (» до проверки поля
+  // Маска (её подключают раньше формы) сообщает об изменении номера событием
   const phoneField = fields[1];
-  attachPhoneMask(phoneField.input, function () {
+  phoneField.input.addEventListener("phonemask", function () {
     if (liveFields.has("phone")) {
       checkField(phoneField);
     }
@@ -117,6 +117,16 @@ export function initForm() {
     openSuccess({ name: fields[0].input.value, phone: fields[1].input.value, car: fields[2].input.value });
     resetForm();
   });
+
+  // «Начать новый расчёт»: очищаем сохранённый выбор и возвращаемся к шагу 1
+  const newEstimate = document.getElementById("newEstimate");
+  if (newEstimate) {
+    newEstimate.addEventListener("click", function () {
+      resetAll();
+      dialog.close();
+      window.location.href = "calculator.html";
+    });
+  }
 
   // Закрытие кликом по фону: и нажатие, и отпускание — на самом <dialog>, а не на содержимом
   // (иначе выделение текста, отпущенное за краем окна, закрывало бы модалку)

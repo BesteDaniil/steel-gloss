@@ -1,0 +1,66 @@
+/* ==========================================================
+   Шаг 2 — SVG-карта кузова и панель выбранных зон.
+   ========================================================== */
+
+/* ===== Карта кузова ===== */
+.bodymap { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: var(--space-5); align-items: start; }
+.bodymap__stage {
+  position: relative; display: grid; place-items: center; padding: var(--space-5) var(--space-3);
+  border: 1px solid var(--line); border-radius: var(--radius-l);
+  background: radial-gradient(circle at 50% 45%, rgba(255, 255, 255, .035), transparent 60%), var(--bg-raised);
+}
+.bodymap__front { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); font: 500 11px/1 var(--font-display); letter-spacing: .2em; text-transform: uppercase; color: var(--dim); }
+.car { width: 100%; max-width: 300px; height: auto; overflow: visible; }
+.car__decor rect, .car__decor path { fill: #15191a; stroke: var(--line-strong); stroke-width: 1; }
+.car__decor .car__body { fill: #0f1213; stroke: rgba(255, 255, 255, .22); }
+.car__decor .car__glass { fill: #1b2224; stroke: rgba(255, 255, 255, .12); }
+
+.zone {
+  fill: rgba(255, 255, 255, .045); stroke: rgba(255, 255, 255, .3); stroke-width: 1; cursor: pointer; outline: none;
+  transition: fill .25s, stroke .25s, filter .25s;
+}
+.zone:hover { fill: var(--accent-soft); stroke: var(--accent); }
+.zone:focus-visible { stroke: var(--accent); stroke-width: 2.5; stroke-dasharray: 5 3; fill: var(--accent-soft); }
+.zone.is-active { fill: var(--accent); stroke: var(--accent); filter: drop-shadow(0 0 6px rgba(196, 255, 58, .75)); }
+.zone.is-included { fill: var(--accent-mid); stroke: var(--accent); cursor: not-allowed; filter: drop-shadow(0 0 4px rgba(196, 255, 58, .45)); }
+.zone.is-included:hover { fill: var(--accent-mid); }
+/* На залитой акцентом зоне акцентная обводка не видна — фокус светлым пунктиром */
+.zone.is-active:focus-visible, .zone.is-included:focus-visible { stroke: #fff; stroke-width: 3; stroke-dasharray: 6 3; }
+
+.panel { position: sticky; top: calc(var(--header-h) + var(--space-3)); max-height: calc(100vh - var(--header-h) - var(--step-bar-h) - 48px); overflow-y: auto; display: flex; flex-direction: column; gap: 12px; padding: var(--space-4) var(--space-3); border: 1px solid var(--line); border-radius: var(--radius-l); background: var(--bg-raised); }
+.panel__label { font: 500 11px/1 var(--font-display); letter-spacing: .16em; text-transform: uppercase; color: var(--dim); }
+.panel__focus { min-height: 74px; padding-bottom: var(--space-2); margin-bottom: 8px; border-bottom: 1px solid var(--line); }
+.panel__name { font: 700 18px/1.3 var(--font-display); }
+.panel__price { margin-top: 6px; font-size: 15px; color: var(--accent); }
+.panel__list { display: grid; gap: 6px; min-height: 28px; }
+.panel__list li { display: flex; justify-content: space-between; gap: 12px; font-size: 14.5px; }
+.panel__list li span:last-child { color: var(--muted); white-space: nowrap; }
+.panel__list .panel__empty { color: var(--dim); }
+.panel__note { font-size: 14px; color: var(--accent); }
+.saving { display: grid; gap: 12px; padding: var(--space-2); border: 1px dashed var(--accent); border-radius: var(--radius-m); background: var(--accent-soft); }
+.saving__text { font-size: 14.5px; font-weight: 600; color: var(--accent); }
+.panel > .btn--block { margin-top: 8px; }
+
+.panel__context { padding-bottom: var(--space-2); margin-bottom: 4px; border-bottom: 1px solid var(--line); font-size: 14px; color: var(--muted); }
+.panel__context b { color: var(--text); font-weight: 600; }
+.panel__context a { color: var(--accent); border-bottom: 1px solid var(--accent-mid); }
+
+/* Проявление схемы: кузов из размытия, затем зоны одна за другой */
+.bodymap__stage { animation: stage-in .9s var(--ease-out) .1s backwards; }
+@keyframes stage-in { from { opacity: 0; filter: blur(18px); transform: scale(.96); } }
+.zone { animation: zone-in .5s var(--ease-out) backwards; animation-delay: calc(var(--n, 0) * 45ms + 350ms); }
+@keyframes zone-in { from { opacity: 0; } }
+.car__decor { pointer-events: none; }
+
+@media (max-width: 1080px) {
+  .bodymap { grid-template-columns: minmax(0, 1fr) 320px; gap: var(--space-4); }
+}
+@media (max-width: 860px) {
+  .bodymap { grid-template-columns: 1fr; }
+  .panel { position: static; max-height: none; overflow: visible; }
+}
+@media (max-width: 560px) {
+  .bodymap__stage { padding: var(--space-5) var(--space-2) var(--space-3); }
+  .car { max-width: 230px; }
+  .panel { padding: var(--space-3) var(--space-2); }
+}

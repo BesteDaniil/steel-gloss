@@ -7,8 +7,15 @@ import { maskPhoneInput, maskPhonePaste, deleteDigitBefore, deleteDigitAfter, ex
 
 const PHONE_PREFIX = "+7 (";
 
-/* onChange вызывается после каждого изменения значения */
-export function attachPhoneMask(input, onChange) {
+/* После каждого изменения значения поле получает событие «phonemask» */
+export function attachPhoneMask(input) {
+  if (!input) {
+    return;
+  }
+  function onChange() {
+    input.dispatchEvent(new CustomEvent("phonemask"));
+  }
+
   let valueBefore = "";
   let caretBefore = 0;
 

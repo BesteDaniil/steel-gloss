@@ -1,0 +1,70 @@
+/* ==========================================================
+   Шаг 3 — смета, форма заявки и модалка успеха.
+   ========================================================== */
+
+/* ===== Смета и форма ===== */
+.checkout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-5); align-items: start; }
+.estimate { padding: var(--space-4); border: 1px solid var(--line-strong); border-radius: var(--radius-l); background: var(--bg-raised); }
+.estimate__head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-2); padding-bottom: var(--space-2); border-bottom: 1px solid var(--line); }
+.estimate__title { font: 700 20px/1 var(--font-display); }
+.estimate__class { font-size: 14px; color: var(--muted); }
+.estimate__empty { padding: var(--space-4) 0; color: var(--muted); }
+.estimate__list { counter-reset: line; }
+.estimate__list li { counter-increment: line; display: grid; grid-template-columns: 30px 1fr auto; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+.estimate__list li::before { content: counter(line, decimal-leading-zero); font: 500 11px/1.9 var(--font-display); color: var(--dim); }
+.estimate__list li b { font-weight: 600; white-space: nowrap; }
+.estimate__total { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-2); margin-top: var(--space-3); }
+.estimate__total span { font: 500 12px/1 var(--font-display); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.estimate__total b { font: 700 clamp(30px, 4vw, 44px)/1 var(--font-display); letter-spacing: -.03em; color: var(--accent); text-shadow: 0 0 22px rgba(196, 255, 58, .45); font-variant-numeric: tabular-nums; }
+
+.form { display: grid; gap: var(--space-3); padding: var(--space-4); border: 1px solid var(--line); border-radius: var(--radius-l); }
+.field { display: grid; gap: 8px; }
+.field label { font-size: 14px; font-weight: 600; }
+.field input {
+  width: 100%; min-height: 54px; padding: 0 16px; border: 1px solid var(--line-strong); border-radius: var(--radius-s);
+  background: var(--bg-card); font-size: 16px; transition: border-color .2s, box-shadow .2s;
+}
+.field input::placeholder { color: var(--dim); }
+.field input:hover { border-color: rgba(255, 255, 255, .3); }
+.field input:focus { border-color: var(--accent); }
+.field input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.field input[aria-invalid="true"] { border-color: var(--error); }
+.field__error { min-height: 0; font-size: 13.5px; color: var(--error); }
+.field__error:empty { display: none; }
+.form__estimate-error:empty { display: block; padding: 0; border: 0; }
+.form__estimate-error { padding: 12px 14px; border: 1px solid rgba(255, 107, 91, .4); border-radius: var(--radius-s); outline: none; }
+.form__hint { font-size: 13px; color: var(--dim); }
+
+.estimate__empty a, .estimate__edit a { color: var(--accent); border-bottom: 1px solid var(--accent-mid); }
+.estimate__edit { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: var(--space-3); padding-top: var(--space-2); border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
+
+/* ===== Модалка ===== */
+.modal {
+  width: min(520px, calc(100% - 32px)); max-height: calc(100% - 32px); padding: 0; border: 1px solid var(--accent); border-radius: var(--radius-l);
+  background: var(--bg-raised); color: var(--text); box-shadow: 0 0 60px rgba(196, 255, 58, .25), 0 30px 80px rgba(0, 0, 0, .8);
+}
+.modal::backdrop { background: rgba(0, 0, 0, .72); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+.modal[open] { animation: modalIn .35s var(--ease); }
+@keyframes modalIn { from { opacity: 0; transform: translateY(16px) scale(.98); } }
+.modal__inner { padding: var(--space-5) var(--space-4) var(--space-4); }
+.modal__badge { display: inline-block; margin-bottom: var(--space-2); padding: 7px 12px; border: 1px solid var(--accent); border-radius: var(--radius-s); font: 500 11px/1 var(--font-display); letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+.modal__title { font: 700 clamp(20px, 3vw, 25px)/1.25 var(--font-display); letter-spacing: -.02em; }
+.modal__data { margin: var(--space-4) 0 var(--space-3); border-top: 1px solid var(--line); }
+.modal__data div { display: flex; justify-content: space-between; gap: var(--space-2); padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+.modal__data dt { color: var(--muted); }
+.modal__data dd { text-align: right; font-weight: 600; overflow-wrap: anywhere; }
+.modal__total dd { font: 700 22px/1.1 var(--font-display); color: var(--accent); text-shadow: 0 0 18px rgba(196, 255, 58, .4); }
+.modal__demo { margin-bottom: var(--space-3); font-size: 13px; color: var(--dim); }
+
+.modal__actions { display: grid; gap: 10px; }
+
+@media (max-width: 1080px) {
+  .checkout { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .estimate, .form { padding: var(--space-3) var(--space-2); }
+  .estimate__list li { grid-template-columns: 24px 1fr auto; gap: 8px; font-size: 14px; }
+  .modal__inner { padding: var(--space-4) var(--space-3) var(--space-3); }
+  .modal__data div { flex-direction: column; gap: 4px; }
+  .modal__data dd { text-align: left; }
+}

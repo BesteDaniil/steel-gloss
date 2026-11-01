@@ -1,16 +1,15 @@
 /* ==========================================================
-   Единое состояние приложения + подписка.
+   Единое состояние приложения + подписка + сохранение.
    Модули не вызывают друг друга: меняют состояние здесь
    и перерисовываются, когда их уведомляют.
+   Состояние переживает переход между страницами (localStorage),
+   синхронизируется между вкладками и при возврате кнопкой «Назад».
    ========================================================== */
 
-import { DEFAULT_CAR_CLASS_ID, getCarClass, getPackage, getZone, hasFullWrap } from "./pricing.js";
+import { getCarClass, getPackage, getZone, hasFullWrap } from "./pricing.js";
+import { STORAGE_KEY, loadState, saveState, clearState, parseStored, createDefaultState, isPersistent } from "./persistence.js";
 
-const state = {
-  carClassId: DEFAULT_CAR_CLASS_ID,
-  selectedPackages: [],
-  selectedZones: []
-};
+let state = loadState();
 
 const listeners = new Set();
 
@@ -28,6 +27,11 @@ function notify() {
   listeners.forEach(function (listener) {
     listener(snapshot);
   });
+}
+
+function commit() {
+  saveState(state);
+  notify();
 }
 
 /* Подписчик сразу получает текущее состояние; возвращается функция отписки */
@@ -54,7 +58,7 @@ export function setCarClass(carClassId) {
     return;
   }
   state.carClassId = carClassId;
-  notify();
+  commit();
 }
 
 export function togglePackage(packageId) {
@@ -62,7 +66,7 @@ export function togglePackage(packageId) {
     return;
   }
   toggleInList(state.selectedPackages, packageId);
-  notify();
+  commit();
 }
 
 /* При полной оклейке зоны уже включены — точечный выбор заблокирован */
@@ -71,7 +75,7 @@ export function toggleZone(zoneId) {
     return;
   }
   toggleInList(state.selectedZones, zoneId);
-  notify();
+  commit();
 }
 
 export function resetZones() {
@@ -79,5 +83,37 @@ export function resetZones() {
     return;
   }
   state.selectedZones = [];
+  commit();
+}
+
+/* Новый расчёт с нуля */
+export function resetAll() {
+  state = createDefaultState();
+  clearState();
   notify();
+}
+
+/* Перечитать сохранённое и перерисовать, если оно отличается от текущего */
+function syncFrom(nextState) {
+  if (JSON.stringify(nextState) === JSON.stringify(state)) {
+    return;
+  }
+  state = nextState;
+  notify();
+}
+
+if (typeof window !== "undefined") {
+  // Другая вкладка поменяла выбор
+  window.addEventListener("storage", function (event) {
+    if (event.key === STORAGE_KEY || event.key === null) {
+      syncFrom(parseStored(event.newValue));
+    }
+  });
+  // Возврат кнопкой «Назад»: страница достаётся из кэша браузера (bfcache) со старым состоянием
+  window.addEventListener("pageshow", function (event) {
+    // Без хранилища страница из кэша сама держит верный выбор — перечитывать нечего
+    if (event.persisted && isPersistent()) {
+      syncFrom(loadState());
+    }
+  });
 }

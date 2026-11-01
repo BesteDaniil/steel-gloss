@@ -4,7 +4,7 @@
    все зоны «включены» и заблокированы.
    ========================================================== */
 
-import { ZONES, getZonePrice, getFullWrapSaving, hasFullWrap, formatRub, PACKAGES } from "./pricing.js";
+import { ZONES, getZonePrice, getFullWrapSaving, hasFullWrap, formatRub, PACKAGES, getCarClass } from "./pricing.js";
 import { subscribe, getState, toggleZone, resetZones, togglePackage } from "./store.js";
 
 const SVG_NS = "http://www.w3.org/2000/svg";
@@ -33,6 +33,7 @@ export function initBodyMap() {
   const savingBox = document.getElementById("zoneSaving");
   const resetButton = document.getElementById("resetZones");
   const switchButton = document.getElementById("switchToFull");
+  const context = document.getElementById("mapContext");
   if (!layer || !focusBox || !list || !note || !savingBox || !resetButton) {
     return;
   }
@@ -66,6 +67,7 @@ export function initBodyMap() {
     focusPrice.textContent = "—";
   }
 
+  let order = 0;
   for (const zone of ZONES) {
     const shape = ZONE_SHAPES[zone.id];
     if (!shape) {
@@ -77,6 +79,9 @@ export function initBodyMap() {
     path.setAttribute("tabindex", "0");
     path.setAttribute("role", "button");
     path.dataset.zone = zone.id;
+    // Порядок проявления зон при загрузке страницы
+    path.style.setProperty("--n", String(order));
+    order++;
     path.addEventListener("click", function () {
       toggleZone(zone.id);
     });
@@ -92,7 +97,11 @@ export function initBodyMap() {
     path.addEventListener("focus", function () {
       showZone(zone);
     });
-    path.addEventListener("pointerleave", clearFocus);
+    path.addEventListener("pointerleave", function () {
+      if (document.activeElement !== path) {
+        clearFocus();
+      }
+    });
     path.addEventListener("blur", clearFocus);
     layer.append(path);
     shapes.set(zone.id, { path: path, zone: zone });
@@ -110,6 +119,20 @@ export function initBodyMap() {
   subscribe(function (state) {
     current = state;
     const fullWrap = hasFullWrap(state.selectedPackages);
+
+    // Что выбрано на шаге 1 — цены зон считаются по этому классу
+    if (context) {
+      const carClass = getCarClass(state.carClassId);
+      context.innerHTML = "";
+      const label = document.createElement("span");
+      label.textContent = "Класс машины: ";
+      const value = document.createElement("b");
+      value.textContent = carClass.name + " ×" + carClass.coefficient.toFixed(1);
+      const link = document.createElement("a");
+      link.href = "calculator.html";
+      link.textContent = "изменить";
+      context.append(label, value, document.createTextNode(" · "), link);
+    }
 
     shapes.forEach(function (view, zoneId) {
       const selected = state.selectedZones.includes(zoneId);

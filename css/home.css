@@ -1,0 +1,116 @@
+/* ==========================================================
+   STEEL & GLOSS — главная страница.
+   Первый экран с рисованным авто, цифры, услуги, шаги, призыв.
+   ========================================================== */
+
+/* ===== Первый экран ===== */
+.hero { position: relative; display: flex; align-items: center; min-height: calc(100vh - var(--header-h)); min-height: calc(100svh - var(--header-h)); padding: var(--space-6) 0; overflow: hidden; }
+.hero::before {
+  content: ""; position: absolute; right: -10%; top: 50%; width: 60vw; max-width: 760px; aspect-ratio: 1; transform: translateY(-50%);
+  background: radial-gradient(closest-side, rgba(196, 255, 58, .07), transparent); pointer-events: none;
+}
+.hero__inner { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); align-items: center; gap: var(--space-5); }
+.hero__text, .hero__art { min-width: 0; }
+.hero__title { font: 700 clamp(34px, 5.2vw, 74px)/1.02 var(--font-display); letter-spacing: -.035em; text-wrap: balance; overflow-wrap: break-word; }
+.hero__title em { font-style: normal; color: var(--accent); }
+.hero__lead { max-width: 520px; margin-top: var(--space-3); font-size: 17px; color: var(--muted); }
+.hero__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: var(--space-4); }
+
+/* ===== Автомобиль линиями ===== */
+.car { display: block; width: 100%; height: auto; overflow: visible; }
+.car__lines { stroke: var(--text); stroke-width: 1.4; }
+.car__line, .car__ground { stroke-dasharray: 1; stroke-dashoffset: 0; animation: car-draw 1.6s var(--ease-out) both; animation-delay: calc(var(--d, 0) * 130ms + 300ms); }
+.car__ground { stroke: var(--line-strong); stroke-width: 1; }
+.car__line--body { stroke: var(--accent); stroke-width: 1.8; filter: drop-shadow(0 0 6px rgba(196, 255, 58, .45)); }
+.car__line--thin { stroke-width: 1; stroke: var(--muted); }
+.car__shine { opacity: 0; animation: car-shine 5s var(--ease) 2.4s 3; }
+@keyframes car-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes car-shine {
+  0% { opacity: 0; transform: translateX(0); }
+  8% { opacity: 1; }
+  45% { opacity: 1; }
+  55%, 100% { opacity: 0; transform: translateX(900px); }
+}
+
+/* ===== Цифры ===== */
+.facts { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--bg-raised); }
+.facts__list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.facts__item { display: flex; flex-direction: column; gap: 8px; padding: var(--space-4) var(--space-3); border-left: 1px solid var(--line); }
+.facts__item:first-child { border-left: 0; padding-left: 0; }
+.facts__item dt { font: 700 clamp(32px, 4.4vw, 56px)/1 var(--font-display); letter-spacing: -.03em; color: var(--accent); }
+.facts__item dd { font-size: 14px; color: var(--muted); }
+
+/* ===== Разделы ===== */
+.section { padding: var(--space-7) 0 0; }
+.section__title { max-width: 760px; margin-bottom: var(--space-5); font: 700 clamp(26px, 3.6vw, 44px)/1.08 var(--font-display); letter-spacing: -.03em; text-wrap: balance; }
+
+/* ===== Карточки ===== */
+.services { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-2); }
+.services > li { display: flex; }
+.card {
+  position: relative; display: flex; flex-direction: column; flex: 1; gap: 12px; padding: var(--space-4) var(--space-3);
+  border: 1px solid var(--line); border-radius: var(--radius-l); background: var(--bg-card);
+  transition: border-color .3s, box-shadow .3s, transform .35s var(--ease);
+}
+.card--step:hover { border-color: var(--accent-mid); box-shadow: 0 0 28px rgba(196, 255, 58, .08); transform: translateY(-4px); }
+.card__icon { width: 44px; height: 44px; margin-bottom: var(--space-1); color: var(--accent); }
+.card__title { font: 700 17px/1.25 var(--font-display); letter-spacing: -.01em; }
+.card__text { font-size: 15px; color: var(--muted); }
+
+/* ===== Шаги ===== */
+.steps-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-2); }
+.steps-cards > li { display: flex; }
+.card--step { color: var(--text); }
+.card--step:focus-visible { outline-offset: 4px; }
+.card__num { font: 500 clamp(40px, 5vw, 64px)/1 var(--font-display); letter-spacing: -.04em; color: transparent; -webkit-text-stroke: 1px var(--accent-mid); transition: color .3s, -webkit-text-stroke-color .3s; }
+.card--step:hover .card__num { color: var(--accent); -webkit-text-stroke-color: var(--accent); }
+.card__go { display: inline-flex; align-items: center; gap: 8px; margin-top: auto; padding-top: var(--space-2); font-weight: 600; font-size: 14px; color: var(--accent); }
+.card__go svg { width: 16px; height: 16px; transition: transform .3s var(--ease); }
+.card--step:hover .card__go svg { transform: translateX(4px); }
+
+/* ===== Финальный призыв ===== */
+.cta { padding: var(--space-7) 0; }
+.cta__box {
+  display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-3); padding: var(--space-6) var(--space-5);
+  border: 1px solid var(--line-strong); border-radius: var(--radius-l);
+  background: radial-gradient(ellipse at 100% 0%, var(--accent-soft), transparent 55%), var(--bg-raised);
+}
+.cta__title { max-width: 640px; font: 700 clamp(26px, 3.6vw, 44px)/1.08 var(--font-display); letter-spacing: -.03em; text-wrap: balance; }
+.cta__text { max-width: 520px; color: var(--muted); font-size: 17px; }
+
+/* ===== Адаптив ===== */
+@media (max-width: 960px) {
+  .hero { min-height: 0; padding: var(--space-5) 0; }
+  .hero__inner { grid-template-columns: minmax(0, 1fr); gap: var(--space-4); }
+  .hero__lead { max-width: 620px; }
+  .services { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .steps-cards { grid-template-columns: minmax(0, 1fr); }
+  .card--step { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: var(--space-3); align-items: start; }
+  .card--step .card__num { grid-row: 1 / span 3; }
+  .card--step .card__go { margin-top: 0; }
+}
+@media (max-width: 860px) {
+  .facts__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .facts__item:nth-child(3) { border-left: 0; padding-left: 0; }
+  .facts__item:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .cta__box { padding: var(--space-5) var(--space-4); }
+}
+@media (max-width: 560px) {
+  .hero__lead, .cta__text { font-size: 16px; }
+  .hero__actions .btn, .cta__box .btn { width: 100%; white-space: normal; text-align: center; }
+  .services { grid-template-columns: minmax(0, 1fr); }
+  .card--step { display: flex; }
+  .facts__item { padding: var(--space-3) var(--space-2); }
+  .cta__box { padding: var(--space-4) var(--space-3); }
+}
+@media (max-width: 360px) {
+  .hero__title { font-size: 30px; }
+  .btn { padding: 0 18px; }
+}
+
+/* ===== Без движения: машина сразу нарисована, блика нет ===== */
+@media (prefers-reduced-motion: reduce) {
+  .car__line, .car__ground { animation: none; stroke-dashoffset: 0; }
+  .car__shine { animation: none; opacity: 0; }
+  .card, .card:hover { transform: none; }
+}

@@ -1,0 +1,68 @@
+/* ==========================================================
+   Шаг 1 — конфигуратор: карточки класса машины и пакетов.
+   ========================================================== */
+
+/* ===== Карточки-переключатели (настоящие radio/checkbox) ===== */
+.option { position: relative; display: block; cursor: pointer; }
+.option__input { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
+.option__card {
+  position: relative; display: flex; flex-direction: column; height: 100%; padding: var(--space-3);
+  border: 1px solid var(--line-strong); border-radius: var(--radius-m); background: var(--bg-card);
+  transition: border-color .35s var(--ease), background-color .35s var(--ease), box-shadow .45s var(--ease), transform .45s var(--ease);
+}
+/* Микро-анимация наведения: неоновая граница проявляется, карточка чуть приближается */
+.option:hover .option__card {
+  border-color: rgba(196, 255, 58, .7); transform: scale(1.02);
+  box-shadow: 0 0 0 1px rgba(196, 255, 58, .25), 0 0 26px rgba(196, 255, 58, .18), inset 0 0 22px rgba(196, 255, 58, .05);
+}
+.option__input:checked + .option__card { border-color: var(--accent); background: linear-gradient(180deg, var(--accent-soft), transparent 70%), var(--bg-card); }
+.option__input:focus-visible + .option__card { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.class-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-2); }
+.class-card__icon { width: 76px; height: 36px; margin-bottom: var(--space-3); color: var(--dim); transition: color .25s; }
+.option__input:checked + .option__card .class-card__icon { color: var(--accent); }
+.class-card__row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.class-card__name { font: 700 18px/1.2 var(--font-display); letter-spacing: -.01em; }
+.class-card__coef { font: 500 13px/1 var(--font-display); color: var(--muted); }
+.option__input:checked + .option__card .class-card__coef { color: var(--accent); }
+.class-card__hint { margin-top: 8px; font-size: 14px; color: var(--muted); }
+
+.package-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-2); }
+.package-card { gap: 12px; padding: var(--space-4) var(--space-4) var(--space-3); }
+.package-card__top { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-2); }
+.package-card__name { font: 700 19px/1.25 var(--font-display); letter-spacing: -.01em; }
+.package-card__check { flex: none; display: grid; place-items: center; width: 24px; height: 24px; border: 1px solid var(--line-strong); border-radius: var(--radius-s); transition: background-color .2s, border-color .2s; }
+.package-card__check svg { width: 14px; height: 14px; opacity: 0; color: var(--accent-ink); transition: opacity .2s; }
+.option__input:checked + .option__card .package-card__check { background: var(--accent); border-color: var(--accent); }
+.option__input:checked + .option__card .package-card__check svg { opacity: 1; }
+.package-card__desc { color: var(--muted); font-size: 15px; }
+.package-card__note { font-size: 13px; color: var(--dim); }
+.package-card__price { margin-top: auto; padding-top: var(--space-2); border-top: 1px solid var(--line); font: 700 22px/1.2 var(--font-display); letter-spacing: -.02em; }
+.option__input:checked + .option__card .package-card__price { color: var(--accent); }
+
+/* ===== Карта кузова ===== */
+
+/* Выбранная карточка, на которую навели, сохраняет свою заливку */
+.option__input:checked + .option__card { box-shadow: 0 0 0 1px rgba(196, 255, 58, .35), 0 0 30px rgba(196, 255, 58, .14); }
+
+@media (hover: none) {
+  .option:hover .option__card { transform: none; box-shadow: none; }
+  .option:hover .option__input:not(:checked) + .option__card { border-color: var(--line-strong); }
+}
+@media (max-width: 860px) {
+  .class-grid { grid-template-columns: 1fr; }
+  .class-grid .option__card { flex-direction: row; align-items: center; gap: var(--space-2); padding: var(--space-2) var(--space-3); }
+  .class-card__icon { flex: none; width: 60px; margin: 0; }
+  .class-card__body { flex: 1; min-width: 0; }
+  .class-card__row { flex-wrap: wrap; gap: 4px 12px; }
+  .class-card__hint { margin-top: 4px; }
+  .package-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .package-card { padding: var(--space-3) var(--space-3) var(--space-2); }
+  .package-card__name { font-size: 17px; }
+}
+@media (max-width: 360px) {
+  .class-card__name { font-size: 16px; }
+  .class-card__icon { width: 48px; }
+}
