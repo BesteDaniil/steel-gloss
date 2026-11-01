@@ -61,6 +61,6 @@
 }
 @media (max-width: 560px) {
   .bodymap__stage { padding: var(--space-5) var(--space-2) var(--space-3); }
-  .car { max-width: 230px; }
+  .car { max-width: 290px; }
   .panel { padding: var(--space-3) var(--space-2); }
 }

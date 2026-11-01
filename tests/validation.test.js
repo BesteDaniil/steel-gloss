@@ -135,6 +135,7 @@ test("имя: обязательно, от 2 символов, только бу
   assert.equal(validateName(""), "Введите имя");
   assert.equal(validateName("   "), "Введите имя");
   assert.equal(validateName("Я"), "Имя — минимум 2 символа");
+  assert.equal(validateName("1"), "Только буквы, пробел и дефис");
   assert.equal(validateName("Иван1"), "Только буквы, пробел и дефис");
   assert.equal(validateName("Иван!"), "Только буквы, пробел и дефис");
   assert.equal(validateName("Анна-Мария"), "");
@@ -154,6 +155,8 @@ test("марка и модель: обязательно, от 2 символо�
   assert.equal(validateCar(""), "Укажите марку и модель");
   assert.equal(validateCar("X"), "Минимум 2 символа");
   assert.equal(validateCar("BMW X5"), "");
+  assert.equal(validateCar("A".repeat(60)), "");
+  assert.equal(validateCar("A".repeat(61)), "Не длиннее 60 символов");
 });
 
 test("смета не должна быть пустой", function () {

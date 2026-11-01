@@ -5,6 +5,7 @@
 
 const PREFIX = "+7 (";
 const NATIONAL_LENGTH = 10;
+export const CAR_MAX_LENGTH = 60;
 
 /* Цифры номера без кода страны (ввод с 8, 7, +7). Ведущая 7/8 — код страны, только если:
    строка начинается с «+7» или «7 (» / «8 (», номер набран целиком (11 цифр)
@@ -135,11 +136,11 @@ export function validateName(value) {
   if (name.length === 0) {
     return "Введите имя";
   }
-  if (name.length < 2) {
-    return "Имя — минимум 2 символа";
-  }
   if (!/^[A-Za-zА-Яа-яЁё\s-]+$/.test(name)) {
     return "Только буквы, пробел и дефис";
+  }
+  if (name.length < 2) {
+    return "Имя — минимум 2 символа";
   }
   return "";
 }
@@ -165,6 +166,9 @@ export function validateCar(value) {
   }
   if (car.length < 2) {
     return "Минимум 2 символа";
+  }
+  if (car.length > CAR_MAX_LENGTH) {
+    return "Не длиннее " + CAR_MAX_LENGTH + " символов";
   }
   return "";
 }

@@ -12,11 +12,11 @@ const SVG_NS = "http://www.w3.org/2000/svg";
 /* Контуры зон в координатах viewBox 0 0 240 480; фары — две фигуры в одной зоне */
 const ZONE_SHAPES = {
   "front-bumper": "M60 26 Q120 14 180 26 Q198 32 201 50 L39 50 Q42 32 60 26 Z",
-  "headlights": "M44 55 L80 55 L73 67 L45 65 Z M196 55 L160 55 L167 67 L195 65 Z",
+  "headlights": "M42 53 L82 53 L74 70 L44 68 Z M198 53 L158 53 L166 70 L196 68 Z",
   "hood": "M46 72 L194 72 L190 158 L50 158 Z",
   "roof": "M80 206 L160 206 Q166 206 166 212 L166 294 Q166 300 160 300 L80 300 Q74 300 74 294 L74 212 Q74 206 80 206 Z",
-  "doors-left": "M38 166 L62 166 Q67 250 62 334 L38 334 Q34 250 38 166 Z",
-  "doors-right": "M202 166 L178 166 Q173 250 178 334 L202 334 Q206 250 202 166 Z",
+  "doors-left": "M36 166 L66 166 Q71 250 66 334 L36 334 Q32 250 36 166 Z",
+  "doors-right": "M204 166 L174 166 Q169 250 174 334 L204 334 Q208 250 204 166 Z",
   "trunk": "M54 342 L186 342 L190 416 L50 416 Z",
   "rear-bumper": "M38 424 L202 424 Q200 448 182 456 Q120 466 58 456 Q40 448 38 424 Z"
 };
@@ -40,6 +40,9 @@ export function initBodyMap() {
   const focusName = focusBox.querySelector(".panel__name");
   const focusPrice = focusBox.querySelector(".panel__price");
 
+  // На тач-экранах наведения нет — подсказка про касание
+  const idleText = window.matchMedia("(hover: none)").matches ? "Коснитесь детали" : "Наведите на деталь";
+  focusName.textContent = idleText;
   let current = getState();
   let shownZone = null;
   const shapes = new Map();
@@ -63,7 +66,7 @@ export function initBodyMap() {
 
   function clearFocus() {
     shownZone = null;
-    focusName.textContent = "Наведите на деталь";
+    focusName.textContent = idleText;
     focusPrice.textContent = "—";
   }
 

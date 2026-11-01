@@ -175,7 +175,7 @@ await tab.eval("localStorage.clear();");
 await tab.reload();
 
 // Главная
-check((await text(tab, "a.btn--glow[href='calculator.html']")).includes("Перейти к расчету сметы"), "главная: кнопка «Перейти к расчету сметы» → calculator.html");
+check((await text(tab, "a.btn--glow[href='calculator.html']")).includes("Перейти к расчёту сметы"), "главная: кнопка «Перейти к расчёту сметы» → calculator.html");
 await tab.shot("01-home");
 await tab.clickAndWait("a.btn--glow[href='calculator.html']");
 check((await tab.eval(PAGE)) === "calculator.html", "клик по кнопке открыл страницу конфигуратора");
