@@ -91,7 +91,7 @@
           <svg class="car" viewBox="0 0 640 270" focusable="false">
             <defs>
               <clipPath id="car-clip">
-                <path d="M40 192V160Q40 148 62 144L150 130Q190 82 260 76H400Q460 80 500 128L580 140Q604 146 604 168V192Z"/>
+                <path d="M40 200L35 176Q34 156 52 151L124 140Q190 133 224 130Q262 100 302 91Q358 82 414 90Q472 102 526 126L586 132Q604 136 605 154L602 200H535.6A44 44 0 1 0 448.4 200H193.6A44 44 0 1 0 106.4 200Z"/>
               </clipPath>
               <linearGradient id="car-shine" x1="0" y1="0" x2="1" y2="0">
                 <stop offset="0" stop-color="#c4ff3a" stop-opacity="0"/>
@@ -102,23 +102,23 @@
 
             <!-- Блик пробегает по кузову -->
             <g clip-path="url(#car-clip)">
-              <g transform="skewX(-22)"><rect class="car__shine" x="-120" y="60" width="90" height="150" fill="url(#car-shine)"/></g>
+              <g transform="skewX(-22)"><rect class="car__shine" x="-120" y="60" width="90" height="170" fill="url(#car-shine)"/></g>
             </g>
 
-            <!-- Линии автомобиля: каждая «прорисовывается» со своей задержкой -->
+            <!-- Линии автомобиля (вид сбоку, перед слева): каждая «прорисовывается» со своей задержкой.
+                 Колёса стоят на земле (y=230), арки — часть контура, линия борта идёт между арками -->
             <g class="car__lines" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path class="car__ground" pathLength="1" d="M10 236H630" style="--d:0"/>
-              <path class="car__line car__line--body" pathLength="1" d="M40 192V160Q40 148 62 144L150 130Q190 82 260 76H400Q460 80 500 128L580 140Q604 146 604 168V192" style="--d:1"/>
-              <path class="car__line" pathLength="1" d="M40 192H102M198 192H442M538 192H604" style="--d:3"/>
-              <path class="car__line" pathLength="1" d="M102 192A48 48 0 0 1 198 192M442 192A48 48 0 0 1 538 192" style="--d:4"/>
-              <path class="car__line" pathLength="1" d="M176 130Q203 92 262 88H330V130ZM344 88H398Q440 92 468 130H344Z" style="--d:5"/>
-              <path class="car__line" pathLength="1" d="M337 88V176M318 142H330M356 142H368" style="--d:6"/>
-              <path class="car__line" pathLength="1" d="M60 150H84M572 148H596M140 158Q330 166 540 158" style="--d:7"/>
-              <circle class="car__line" pathLength="1" cx="150" cy="192" r="36" style="--d:6"/>
-              <circle class="car__line" pathLength="1" cx="490" cy="192" r="36" style="--d:6"/>
-              <circle class="car__line car__line--thin" pathLength="1" cx="150" cy="192" r="17" style="--d:8"/>
-              <circle class="car__line car__line--thin" pathLength="1" cx="490" cy="192" r="17" style="--d:8"/>
-              <path class="car__line car__line--thin" pathLength="1" d="M150 175V209M133 192H167M138 180L162 204M162 180L138 204M490 175V209M473 192H507M478 180L502 204M502 180L478 204" style="--d:9"/>
+              <path class="car__ground" pathLength="1" d="M10 230H630" style="--d:0"/>
+              <path class="car__line car__line--body" pathLength="1" d="M40 200L35 176Q34 156 52 151L124 140Q190 133 224 130Q262 100 302 91Q358 82 414 90Q472 102 526 126L586 132Q604 136 605 154L602 200H535.6A44 44 0 1 0 448.4 200H193.6A44 44 0 1 0 106.4 200Z" style="--d:1"/>
+              <path class="car__line" pathLength="1" d="M248 134Q272 106 306 98L362 95V134ZM374 95H410Q448 100 486 124L374 130Z" style="--d:4"/>
+              <path class="car__line" pathLength="1" d="M368 95V196M236 136V194M438 132V192" style="--d:5"/>
+              <path class="car__line" pathLength="1" d="M236 147Q330 144 438 140" style="--d:6"/>
+              <path class="car__line" pathLength="1" d="M314 150H330M406 147H422M46 158L78 152M586 138L601 142" style="--d:7"/>
+              <circle class="car__line" pathLength="1" cx="150" cy="194" r="36" style="--d:5"/>
+              <circle class="car__line" pathLength="1" cx="492" cy="194" r="36" style="--d:5"/>
+              <circle class="car__line car__line--thin" pathLength="1" cx="150" cy="194" r="22" style="--d:8"/>
+              <circle class="car__line car__line--thin" pathLength="1" cx="492" cy="194" r="22" style="--d:8"/>
+              <path class="car__line car__line--thin" pathLength="1" d="M150 194L150.0 177.0M150 194L166.2 188.7M150 194L160.0 207.8M150 194L140.0 207.8M150 194L133.8 188.7M492 194L492.0 177.0M492 194L508.2 188.7M492 194L502.0 207.8M492 194L482.0 207.8M492 194L475.8 188.7" style="--d:9"/>
             </g>
           </svg>
         </div>
